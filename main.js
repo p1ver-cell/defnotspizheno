@@ -1078,19 +1078,71 @@ const dotaHeroes = [
     rangeType: "Melee",
     complexity: "Medium",
     releaseYear: "2013"
-  },
-  {
-    name: "Zeus",
-    gender: "Male",
-    species: "God",
-    position: "Mid",
-    attribute: "Intelligence",
-    rangeType: "Ranged",
-    complexity: "Easy",
-    releaseYear: "2010"
   }
 ];
 
-/*function SubmitHero() {
+let selectedHero;  // The randomly selected hero
 
-}*/
+// Function to randomly select a hero
+function selectRandomHero() {
+  const randomIndex = Math.floor(Math.random() * dotaHeroes.length);
+  selectedHero = dotaHeroes[randomIndex];
+  console.log("Randomly selected hero:", selectedHero.name);  // Debugging: see the selected hero
+}
+
+// Function to check the player's guess and display hero details (both correct and incorrect) in the table
+function checkGuess() {
+  const playerGuess = document.getElementById("hero-input").value.trim().toLowerCase();
+
+  // Get the table body element where results will be displayed
+  const resultTable = document.getElementById("result");
+
+  // Check if the guess matches the selected hero
+  if (playerGuess === selectedHero.name.toLowerCase()) {
+    document.getElementById("feedback").textContent = `Correct! The hero is ${selectedHero.name}.`;
+
+    // Add the correct hero's details to the table (no special styling)
+    resultTable.innerHTML =
+        "<tr><td>" + selectedHero.name + "</td>" +
+        "<td>" + selectedHero.gender + "</td>" +
+        "<td>" + selectedHero.species + "</td>" +
+        "<td>" + selectedHero.position + "</td>" +
+        "<td>" + selectedHero.attribute + "</td>" +
+        "<td>" + selectedHero.rangeType + "</td>" +
+        "<td>" + selectedHero.complexity + "</td>" +
+        "<td>" + selectedHero.releaseYear + "</td>" +
+        "</tr>"+resultTable.innerHTML;
+  } else {
+    document.getElementById("feedback").textContent = "Wrong guess! Try again.";
+
+    const wrongHero = dotaHeroes.find(hero => hero.name.toLowerCase() === playerGuess);
+
+    if (wrongHero) {
+      // Display incorrect guess details in red
+      resultTable.innerHTML =
+          "<tr style='color: red;'><td>" + wrongHero.name + "</td>" +
+          "<td>" + wrongHero.gender + "</td>" +
+          "<td>" + wrongHero.species + "</td>" +
+          "<td>" + wrongHero.position + "</td>" +
+          "<td>" + wrongHero.attribute + "</td>" +
+          "<td>" + wrongHero.rangeType + "</td>" +
+          "<td>" + wrongHero.complexity + "</td>" +
+          "<td>" + wrongHero.releaseYear + "</td>" +
+          "</tr>"+resultTable.innerHTML;
+    }
+  }
+
+  // Clear the input field after checking the guess
+  document.getElementById("hero-input").value = "";
+}
+
+// Allow checking guess by pressing Enter
+function checkKey(event) {
+  if (event.keyCode === 13) {  // Enter key
+    event.preventDefault();
+    checkGuess();
+  }
+}
+
+// Initialize the game by selecting a random hero when the page loads
+selectRandomHero();

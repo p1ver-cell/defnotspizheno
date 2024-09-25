@@ -11,10 +11,24 @@
         body {
             background: url('assets/dotabackground.jpg') no-repeat fixed;
         }
+        .game-menu {
+            text-align: center;
+            padding: 20px;
+        }
+        .hero-details-table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .hero-details-table, th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<div class="game-menu" style="text-align: center;">
+<div class="game-menu">
     <h2>GUESS HERO FROM DOTA 2!</h2>
     <div class="clue-section">
         <button class="clue-button">QUOTE CLUE</button>
@@ -23,11 +37,14 @@
     </div>
 
     <div class="input-container">
-        <input type="text" id="hero-input" placeholder="Type a Hero's name ...">
-        <button class="submit-button" onclick="checkHero()">
+        <input type="text" id="hero-input" placeholder="Type a Hero's name ..." onkeydown="checkKey(event)">
+        <button class="submit-button" onclick="checkGuess(document.getElementById('hero-input').value)">
             <img src="assets/send.png" alt="Submit" class="submit-icon">
         </button>
     </div>
+
+    <!-- Add feedback section -->
+    <p id="feedback"></p> <!-- This will display correct/incorrect feedback -->
 
     <table class="hero-details-table">
         <thead>
@@ -42,7 +59,7 @@
             <th>Release Year</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="result">
         </tbody>
     </table>
 </div>
