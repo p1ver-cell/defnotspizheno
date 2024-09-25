@@ -1089,59 +1089,8 @@ const dotaHeroes = [
     complexity: "Easy",
     releaseYear: "2010"
   }
-
 ];
 
+/*function SubmitHero() {
 
-function checkHero() {
-  const input = document.getElementById("hero-input").value.trim().toLowerCase();
-
-  if (input === correctHero.name.toLowerCase()) {
-    setHeroDetails("correct", correctHero);
-  } else {
-    setHeroDetails("incorrect", correctHero);
-  }
-}
-
-function setHeroDetails(status, hero) {
-  compareAndHighlight("hero-gender", hero.gender, status);
-  compareAndHighlight("hero-species", hero.species, status);
-  compareAndHighlight("hero-position", hero.position, status);
-  compareAndHighlight("hero-attribute", hero.attribute, status);
-  compareAndHighlight("hero-range", hero.rangeType, status);
-  compareAndHighlight("hero-complexity", hero.complexity, status);
-  compareAndHighlight("hero-release", hero.releaseYear, status);
-}
-
-function compareAndHighlight(id, correctValue, status) {
-  const element = document.getElementById(id);
-  const currentText = element.textContent;
-
-  if (currentText.toLowerCase() === correctValue.toLowerCase()) {
-    element.classList.add("correct");
-    element.classList.remove("incorrect");
-  } else {
-    element.classList.add("incorrect");
-    element.classList.remove("correct");
-  }
-
-  element.textContent = correctValue;
-}
-
-function resetGame() {
-  document.getElementById("hero-input").value = '';
-  setHeroDetails("", {
-    gender: "?",
-    species: "?",
-    position: "?",
-    attribute: "?",
-    rangeType: "?",
-    complexity: "?",
-    releaseYear: "?"
-  });
-
-  const cells = document.querySelectorAll("td");
-  cells.forEach(cell => {
-    cell.classList.remove("correct", "incorrect");
-  });
-}
+}*/
