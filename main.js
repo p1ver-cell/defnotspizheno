@@ -1081,27 +1081,74 @@ const dotaHeroes = [
   }
 ];
 
-let selectedHero;  // The randomly selected hero
+let selectedHero;
 
-// Function to randomly select a hero
 function selectRandomHero() {
   const randomIndex = Math.floor(Math.random() * dotaHeroes.length);
   selectedHero = dotaHeroes[randomIndex];
-  console.log("Randomly selected hero:", selectedHero.name);  // Debugging: see the selected hero
+  console.log("Randomly selected hero:", selectedHero.name);
 }
 
-// Function to check the player's guess and display hero details (both correct and incorrect) in the table
+function compareProperties(guessedHero) {
+  const resultTable = document.getElementById("result");
+  const firstRow = resultTable.rows[0];
+
+  if (guessedHero.name === selectedHero.name) {
+    firstRow.cells[0].style.backgroundColor = 'green';
+  } else {
+    firstRow.cells[0].style.backgroundColor = 'red';
+  }
+
+  if (guessedHero.gender === selectedHero.gender) {
+    firstRow.cells[1].style.backgroundColor = 'green';
+  } else {
+    firstRow.cells[1].style.backgroundColor = 'red';
+  }
+
+  if (guessedHero.species === selectedHero.species) {
+    firstRow.cells[2].style.backgroundColor = 'green';
+  } else {
+    firstRow.cells[2].style.backgroundColor = 'red';
+  }
+
+  if (guessedHero.position === selectedHero.position) {
+    firstRow.cells[3].style.backgroundColor = 'green';
+  } else {
+    firstRow.cells[3].style.backgroundColor = 'red';
+  }
+
+  if (guessedHero.attribute === selectedHero.attribute) {
+    firstRow.cells[4].style.backgroundColor = 'green';
+  } else {
+    firstRow.cells[4].style.backgroundColor = 'red';
+  }
+
+  if (guessedHero.rangeType === selectedHero.rangeType) {
+    firstRow.cells[5].style.backgroundColor = 'green';
+  } else {
+    firstRow.cells[5].style.backgroundColor = 'red';
+  }
+
+  if (guessedHero.complexity === selectedHero.complexity) {
+    firstRow.cells[6].style.backgroundColor = 'green';
+  } else {
+    firstRow.cells[6].style.backgroundColor = 'red';
+  }
+
+  if (guessedHero.releaseYear === selectedHero.releaseYear) {
+    firstRow.cells[7].style.backgroundColor = 'green';
+  } else {
+    firstRow.cells[7].style.backgroundColor = 'red';
+  }
+}
+
 function checkGuess() {
   const playerGuess = document.getElementById("hero-input").value.trim().toLowerCase();
-
-  // Get the table body element where results will be displayed
   const resultTable = document.getElementById("result");
 
-  // Check if the guess matches the selected hero
   if (playerGuess === selectedHero.name.toLowerCase()) {
     document.getElementById("feedback").textContent = `Correct! The hero is ${selectedHero.name}.`;
 
-    // Add the correct hero's details to the table (no special styling)
     resultTable.innerHTML =
         "<tr><td>" + selectedHero.name + "</td>" +
         "<td>" + selectedHero.gender + "</td>" +
@@ -1118,9 +1165,8 @@ function checkGuess() {
     const wrongHero = dotaHeroes.find(hero => hero.name.toLowerCase() === playerGuess);
 
     if (wrongHero) {
-      // Display incorrect guess details in red
       resultTable.innerHTML =
-          "<tr style='color: red;'><td>" + wrongHero.name + "</td>" +
+          "<tr><td>" + wrongHero.name + "</td>" +
           "<td>" + wrongHero.gender + "</td>" +
           "<td>" + wrongHero.species + "</td>" +
           "<td>" + wrongHero.position + "</td>" +
@@ -1130,19 +1176,17 @@ function checkGuess() {
           "<td>" + wrongHero.releaseYear + "</td>" +
           "</tr>"+resultTable.innerHTML;
     }
+      compareProperties(wrongHero);
   }
 
-  // Clear the input field after checking the guess
   document.getElementById("hero-input").value = "";
 }
 
-// Allow checking guess by pressing Enter
 function checkKey(event) {
-  if (event.keyCode === 13) {  // Enter key
+  if (event.keyCode === 13) {
     event.preventDefault();
     checkGuess();
   }
 }
 
-// Initialize the game by selecting a random hero when the page loads
 selectRandomHero();
